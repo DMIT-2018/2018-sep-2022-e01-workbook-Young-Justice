@@ -73,6 +73,25 @@ void Main()
 					}
 					);
 	results.Dump();
+	
+	// List all albums that are from 1990.
+	// Display the album title and artist name.
+	// For each album, display its tracks.
+	
+	var albumtracks = Albums
+						.Where(x => x.ReleaseYear == 1990)
+						.Select(x => new
+						{
+							Title = x.Title,
+							Artist = x.Artist.Name,
+							Tracks = x.Tracks
+										.Select(y => new 
+										{
+											Song = y.Name,
+											Genre = y.Genre.Name
+										})
+						})
+						.Dump();
 }
 
 public class CustomerItem
