@@ -88,6 +88,7 @@ Albums
 Albums
 	.GroupBy(a => new {a.ReleaseLabel, a.ReleaseYear})
 	.Where(eGP => eGP.Count() > 2)
+	.ToList() // This forces the collection into memory for further processing in TrackCountA
 	.Select(eachGroupPile => new
 	{
 		Label = eachGroupPile.Key.ReleaseLabel,
@@ -98,7 +99,8 @@ Albums
 						{
 							Title = eGPInstance.Title,
 							Artist = eGPInstance.Artist.Name,
-							TrackCount = eGPInstance.Tracks.Count(),
+							TrackCountA = eGPInstance.Tracks.Count(),
+							TrackCountB = eGPInstance.Tracks.Select(x => x).Count(),
 							YearOfAlbum = eGPInstance.ReleaseYear
 						})
 	})
