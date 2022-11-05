@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using WebApp.Data;
 
+#region Additional Namespaces
+using ChinookSystem;
+#endregion
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -27,7 +31,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // The extension method will extend the IServiceCollection Class.
 // The extension method requires a parameter options.UseSqlServer(XXX)
 // where XXX is the connection string variable
-// builder.Services.ChinookSystemBackendDependencies(options => options.UseSqlServer(connectionStringChinook));
+
+ builder.Services.ChinookSystemBackendDependencies(options => options.UseSqlServer(connectionStringChinook));
 
 
 
